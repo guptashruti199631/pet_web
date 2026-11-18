@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Book an Appointment | PetCure Clinic</title>
+<meta name="description" content="Book a vet visit in three steps: choose a service, a doctor and a time.">
+<meta name="theme-color" content="#14233B">
+<link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&amp;family=Playfair+Display:wght@600;700&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="site-header">
+  <nav class="wrap nav" aria-label="Main">
+    <a class="brand" href="index.html"><svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true"><rect width="36" height="36" rx="10" fill="#14233B"/><circle cx="11" cy="14" r="3" fill="#fff"/><circle cx="18" cy="11" r="3" fill="#fff"/><circle cx="25" cy="14" r="3" fill="#fff"/><path d="M18 17c-4 0-7 3-7 6 0 2 2 3 4 3 1.3 0 2-.6 3-.6s1.7.6 3 .6c2 0 4-1 4-3 0-3-3-6-7-6z" fill="#fff"/></svg><span>PetCure Clinic</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Menu"><svg width="22" height="22" viewBox="0 0 22 22" aria-hidden="true"><path d="M3 6h16M3 11h16M3 16h16" stroke="#14233B" stroke-width="2" stroke-linecap="round"/></svg></button>
+    <div class="nav-links" id="nav-links">
+      <a class="l" href="index.html">Home</a>
+      <a class="l" href="services.html">Services</a>
+      <a class="l" href="grooming.html">Grooming</a>
+      <a class="l" href="vaccination.html">Vaccination</a>
+      <a class="l" href="pricing.html">Pricing &amp; Offers</a>
+      <a class="btn2" href="cart.html">Cart (<span data-cart-count>0</span>)</a>
+      <a class="btn" href="appointment.html">Book appointment</a>
+    </div>
+  </nav>
+</header>
+<main id="main">
+<section class="bg-sand"><div class="wrap stack" style="padding-top:48px;padding-bottom:48px;gap:12px">
+  <span class="eyebrow">Doctor appointment</span>
+  <h1 class="h1-sm" style="font-size:48px">Book a visit in three steps</h1>
+  <p style="font-size:18px">Pick a service, a doctor and a time. We will confirm by phone or message.</p>
+</div></section>
+
+<section class="sec" style="padding-top:48px"><div class="wrap split" style="gap:32px;align-items:start;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
+  <div class="stack-lg" id="booking-form">
+    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">1. Choose a service</h2><div class="pills" id="pick-service" role="group" aria-label="Service"></div></div>
+    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">2. Choose a doctor</h2><div class="pills" id="pick-doctor" role="group" aria-label="Doctor"></div></div>
+    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">3. Pick a day and time</h2>
+      <div class="pills" id="pick-day" role="group" aria-label="Day" style="margin-bottom:16px"></div>
+      <div class="pills" id="pick-time" role="group" aria-label="Time"></div>
+    </div>
+    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">Your details</h2>
+      <div class="fields">
+        <div class="field"><label for="owner">Your name</label><input id="owner" autocomplete="name"></div>
+        <div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" autocomplete="tel"></div>
+        <div class="field"><label for="pet">Pet's name and type</label><input id="pet" placeholder="e.g. Bruno, dog"></div>
+      </div>
+      <label class="checkbox"><input type="checkbox" id="first" checked><span>This is our first visit (20% off)</span></label>
+    </div>
+  </div>
+
+  <aside class="card summary" id="booking-summary" aria-live="polite">
+    <img src="assets/images/golden-retriever-mountains.jpg" alt="" style="width:100%;height:140px;object-fit:cover;border-radius:14px;object-position:center 30%">
+    <h2 style="font-size:24px">Booking summary</h2>
+    <div class="between"><span>Service</span><b id="s-service"></b></div>
+    <div class="between"><span>Doctor</span><b id="s-doctor"></b></div>
+    <div class="between"><span>When</span><b id="s-when"></b></div>
+    <hr>
+    <div class="between"><span>Starting price</span><b id="s-base"></b></div>
+    <div class="between" style="color:var(--navy)"><span>First-visit discount</span><b id="s-disc"></b></div>
+    <div class="between" style="font-size:20px"><span>Estimated total</span><b id="s-total"></b></div>
+    <p style="font-size:14px;color:var(--muted)">Final cost is confirmed by your vet. Includes complimentary health snapshot.</p>
+    <button class="btn" type="button" id="confirm">Confirm booking</button>
+    <p class="error" id="error" role="alert"></p>
+  </aside>
+
+  <div class="card done-card" id="booking-done" hidden style="text-align:center;align-items:center;padding:48px">
+    <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#14233B"/><path d="M19 33l9 9 17-19" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h2 style="font-size:32px">You are booked in</h2>
+    <p id="d-what"></p>
+    <p id="d-msg"></p>
+    <button class="btn2" type="button" id="reset">Make another booking</button>
+  </div>
+</div></section>
+</main>
+<footer class="site-footer">
+  <div class="wrap">
+    <div><p class="name">PetCure Clinic</p><p style="margin-top:8px;font-size:15px">[Street address, City]<br>[Phone number]<br>[Email]</p><p style="margin-top:12px;font-size:15px">Open 7 days, 9:00 am – 8:00 pm</p></div>
+    <div class="col"><a href="services.html">Services</a><a href="grooming.html">Grooming</a><a href="vaccination.html">Vaccination</a></div>
+    <div class="col"><a href="appointment.html">Book appointment</a><a href="pricing.html">Pricing &amp; offers</a><a href="pricing.html#reviews">Reviews</a><a href="cart.html">Cart</a></div>
+    <div style="font-size:15px"><p><strong>Emergency?</strong></p><p>Call us first, any time: [Emergency number]</p></div>
+  </div>
+  <p class="copyright">&copy; <span id="year">2026</span> PetCure Clinic. All rights reserved.</p>
+</footer>
+<script src="js/main.js"></script>
+<script src="js/appointment.js"></script>
+</body>
+</html>
