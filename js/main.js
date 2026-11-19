@@ -4,6 +4,28 @@
 
   var CART_KEY = 'petcure_cart';
 
+  /* ---- Clinic contact settings: change these in one place ---- */
+  var CLINIC = {
+    phone: '0123456789',            // number customers call to book
+    phoneDisplay: '0123456789',
+    whatsapp: '919876543210',       // WhatsApp number, with country code 91, no + or spaces
+    email: 'petcure@gmail.com'      // booking emails are delivered here (via FormSubmit)
+  };
+
+  // Sends the booking to the clinic's email (FormSubmit) and returns a WhatsApp link with the same text.
+  // The first booking ever sent triggers a one-time activation email from FormSubmit to CLINIC.email.
+  function sendBooking(subject, fields) {
+    var lines = Object.keys(fields).map(function (k) { return k + ': ' + fields[k]; });
+    var text = 'New booking: PetCure Clinic\n' + subject + '\n\n' + lines.join('\n');
+    var payload = Object.assign({ _subject: subject, _template: 'table', _captcha: 'false' }, fields);
+    var request = fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CLINIC.email), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+      body: JSON.stringify(payload)
+    }).then(function (r) { return r.ok; }).catch(function () { return false; });
+    return { emailed: request, whatsappUrl: 'https://wa.me/' + CLINIC.whatsapp + '?text=' + encodeURIComponent(text) };
+  }
+
   var Cart = {
     read: function () {
       try { var v = localStorage.getItem(CART_KEY); return v ? JSON.parse(v) : null; }
@@ -58,7 +80,7 @@
     return out;
   }
 
-  window.PetCure = { Cart: Cart, fmt: fmt, toast: showToast, upcomingDays: upcomingDays,
+  window.PetCure = { Cart: Cart, fmt: fmt, toast: showToast, upcomingDays: upcomingDays, CLINIC: CLINIC, sendBooking: sendBooking,
     TIMES: ['10:00 am', '11:30 am', '2:00 pm', '3:30 pm', '5:00 pm', '6:30 pm'] };
 
   document.addEventListener('DOMContentLoaded', function () {

@@ -126,7 +126,7 @@
     if (st.time < 0) { err.textContent = 'Please pick a time.'; return; }
     if (!owner || !phone) { err.textContent = 'Please add your name and phone number.'; return; }
 
-    $('d-when').textContent = DAYS[st.day] + ' at ' + TIMES[st.time] + '. We will message ' + phone + ' to confirm.';
+    $('d-when').textContent = DAYS[st.day] + ' at ' + TIMES[st.time] + '. We will call or message ' + phone + ' to confirm.';
     var g = $('d-groups'); g.innerHTML = '';
     st.pets.forEach(function (p, pi) {
       var lines = st.items.filter(function (i) { return i.pet === pi; }).map(function (i) { return i.name; });
@@ -137,9 +137,25 @@
       g.appendChild(box);
     });
     $('d-total').textContent = P.fmt(st.total);
+
+    var fields = { 'Name': owner, 'Phone': phone, 'When': DAYS[st.day] + ', ' + TIMES[st.time] };
+    st.pets.forEach(function (p, pi) {
+      var lines = st.items.filter(function (i) { return i.pet === pi; }).map(function (i) { return i.name + ' (' + P.fmt(i.price) + ')'; });
+      if (lines.length) fields['Pet: ' + p.name + ' (' + p.type + ')'] = lines.join(', ');
+    });
+    fields['First visit'] = st.first ? 'Yes (20% off)' : 'No';
+    fields['Estimated total'] = P.fmt(st.total);
+    var sent = P.sendBooking('Cart booking: ' + st.items.length + ' service(s), ' + DAYS[st.day] + ' ' + TIMES[st.time], fields);
+    $('wa-link').href = sent.whatsappUrl;
+    var note = $('email-status');
+    sent.emailed.then(function (ok) {
+      note.textContent = ok
+        ? 'Your booking has been sent to the clinic. For a faster reply, send it on WhatsApp or give us a call.'
+        : 'We could not send your booking automatically. Please tap "Send booking on WhatsApp" or call us to confirm.';
+    });
     $('cart-form').hidden = true; $('cart-summary').hidden = true; $('cart-done').hidden = false;
     P.Cart.save([]);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    ($('booking-done') || $('cart-done')).scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   render();

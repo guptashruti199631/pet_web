@@ -43,6 +43,17 @@
     $('s-total').textContent = P.fmt(base - disc);
   }
 
+  function showSendStatus(sent) {
+    $('wa-link').href = sent.whatsappUrl;
+    var note = $('email-status');
+    note.textContent = 'Sending your booking to the clinic…';
+    sent.emailed.then(function (ok) {
+      note.textContent = ok
+        ? 'Your booking has been sent to the clinic. For a faster reply, send it on WhatsApp or give us a call.'
+        : 'We could not send your booking automatically. Please tap "Send booking on WhatsApp" or call us to confirm.';
+    });
+  }
+
   $('first').addEventListener('change', function (e) { st.first = e.target.checked; render(); });
 
   $('confirm').addEventListener('click', function () {
@@ -52,11 +63,21 @@
     $('error').textContent = '';
     $('d-what').innerHTML = '';
     $('d-what').append(SERVICES[st.service][0] + ' with ' + DOCTORS[st.doctor], document.createElement('br'), DAYS[st.day] + ', ' + TIMES[st.time]);
-    $('d-msg').textContent = 'We will message ' + phone + ' to confirm. See you and ' + (pet || 'your pet') + ' soon.';
+    $('d-msg').textContent = 'We will call or message ' + phone + ' to confirm. See you and ' + (pet || 'your pet') + ' soon.';
+
+    var base = SERVICES[st.service][1], disc = st.first ? Math.round(base * 0.2) : 0;
+    var sent = P.sendBooking('Appointment: ' + SERVICES[st.service][0] + ', ' + DAYS[st.day] + ' ' + TIMES[st.time], {
+      'Name': owner, 'Phone': phone, 'Pet': pet || '(not given)',
+      'Service': SERVICES[st.service][0], 'Doctor': DOCTORS[st.doctor],
+      'When': DAYS[st.day] + ', ' + TIMES[st.time],
+      'First visit': st.first ? 'Yes (20% off)' : 'No',
+      'Estimated total': P.fmt(base - disc)
+    });
+    showSendStatus(sent);
     $('booking-form').hidden = true;
     $('booking-summary').hidden = true;
     $('booking-done').hidden = false;
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    ($('booking-done') || $('cart-done')).scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 
   $('reset').addEventListener('click', function () {
