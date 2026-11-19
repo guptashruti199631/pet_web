@@ -283,5 +283,30 @@ a.card:hover { box-shadow: 0 0 0 1px var(--line), 0 12px 28px rgba(20, 35, 59, .
 .clinic-photos figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
 .clinic-photos figcaption { font-size: 14px; color: var(--muted); }
 .signboard { width: 100%; height: auto; display: block; filter: drop-shadow(0 16px 30px rgba(20, 35, 59, .25)); }
-.room-fig img { width: 100%; aspect-ratio: 588 / 340; object-fit: cover; border-radius: 20px; box-shadow: 0 16px 40px rgba(20, 35, 59, .15); }
+.room-fig img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 20px; box-shadow: 0 16px 40px rgba(20, 35, 59, .15); }
 @media (max-width: 860px) { .clinic-photos { grid-template-columns: 1fr; } }
+
+.room-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+/* Booking count badge in header */
+.btn .badge { display: inline-flex; align-items: center; justify-content: center; min-width: 22px; height: 22px; padding: 0 6px; margin-left: 8px; border-radius: 999px; background: var(--navy); color: #fff; font-size: 13px; }
+
+/* Grooming & Vaccination page */
+.care-hero .page-hero-img { box-shadow: 0 16px 40px rgba(0, 0, 0, .35); }
+.btn2.on-dark { color: #fff; box-shadow: inset 0 0 0 2px #fff; }
+.btn2.on-dark:hover { background: rgba(255, 255, 255, .1); }
+.subnav { position: sticky; top: 72px; z-index: 30; background: #fff; border-bottom: 1px solid var(--line); }
+.subnav .wrap { display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none; }
+.subnav .wrap::-webkit-scrollbar { display: none; }
+.subnav a { flex: none; display: inline-flex; align-items: center; min-height: 48px; padding: 0 14px; text-decoration: none; font-weight: 500; color: var(--ink); white-space: nowrap; }
+.subnav a:hover { color: var(--navy); box-shadow: inset 0 -2px 0 var(--gold); }
+.anchor { scroll-margin-top: 130px; }
+.mini-feature { display: flex; gap: 20px; align-items: center; margin-top: 24px; }
+.mini-feature img { width: 200px; flex: none; aspect-ratio: 284 / 177; object-fit: cover; border-radius: 14px; }
+@media (max-width: 1060px) { .subnav { top: 72px; } }
+@media (max-width: 720px) {
+  .room-pair { grid-template-columns: 1fr; }
+  .mini-feature { flex-direction: column; align-items: flex-start; }
+  .mini-feature img { width: 100%; }
+  .subnav { top: 72px; }
+}

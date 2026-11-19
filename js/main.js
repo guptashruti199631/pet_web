@@ -38,11 +38,11 @@
       var items = Cart.read() || [];
       items.push({ id: Date.now() + Math.random(), name: name, price: price, pet: -1 });
       Cart.save(items);
-      showToast(name + ' added to cart');
+      showToast(name + ' added to your booking');
     },
     updateCount: function (n) {
       if (n == null) { var c = Cart.read(); n = c ? c.length : 0; }
-      document.querySelectorAll('[data-cart-count]').forEach(function (el) { el.textContent = n; });
+      document.querySelectorAll('[data-cart-count]').forEach(function (el) { el.textContent = n; el.hidden = !n; });
     }
   };
 
@@ -57,7 +57,7 @@
       t.className = 'toast';
       t.setAttribute('role', 'status');
       t.setAttribute('aria-live', 'polite');
-      t.innerHTML = '<span></span><a href="cart.html">View cart</a>';
+      t.innerHTML = '<span></span><a href="book.html">Book now</a>';
       document.body.appendChild(t);
     }
     t.querySelector('span').textContent = msg;

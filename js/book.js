@@ -1,4 +1,4 @@
-/* Cart & multi-pet booking */
+/* Book page: services (cart), doctor, pets, day & time -> confirm on WhatsApp */
 (function () {
   'use strict';
   var P = window.PetCure;
@@ -6,17 +6,39 @@
 
   var DAYS = P.upcomingDays(6);
   var TIMES = P.TIMES;
-  var CATALOG = [['Check-up', 500, 'General check-up'], ['Rabies', 400, 'Rabies'], ['Booster', 700, 'Adult booster'], ['Basic Bath', 700, 'Basic Bath'],
-    ['Full Groom', 1300, 'Full Groom'], ['Spa Day', 2000, 'Spa Day'], ['Dental', 1800, 'Dental care'], ['Blood test', 400, 'Blood tests']];
+  var DOCTORS = ['Any available doctor', 'Dr. Harish', 'Dr. Aparna', 'Dr. Siddarth'];
+  // [button label, price, name in booking, ?service= key]
+  var CATALOG = [
+    ['Check-up', 500, 'General check-up', 'checkup'], ['Puppy / kitten shot', 600, 'Puppy / kitten shot', 'vaccine'],
+    ['Rabies', 400, 'Rabies', 'rabies'], ['Booster', 700, 'Adult booster', 'booster'],
+    ['Basic Bath', 700, 'Basic Bath', 'bath'], ['Full Groom', 1300, 'Full Groom', 'groom'], ['Spa Day', 2000, 'Spa Day', 'spa'],
+    ['Dental', 1800, 'Dental care', 'dental'], ['Blood test', 400, 'Blood tests', 'bloodtest']
+  ];
 
   function readPets() {
     try { var v = localStorage.getItem(PETS_KEY); return v ? JSON.parse(v) : []; } catch (e) { return []; }
   }
   function savePets() { try { localStorage.setItem(PETS_KEY, JSON.stringify(st.pets)); } catch (e) { /* ignore */ } }
 
-  var st = { items: P.Cart.read() || [], pets: readPets(), newType: 'Dog', day: 0, time: -1, first: true };
-  // Auto-assign when there is exactly one pet
+  var params = new URLSearchParams(location.search);
+  var docParam = parseInt(params.get('doctor'), 10);
+  var st = {
+    items: P.Cart.read() || [], pets: readPets(), newType: 'Dog',
+    doctor: docParam > 0 && docParam < DOCTORS.length ? docParam : 0,
+    day: 0, time: -1, first: true, total: 0
+  };
+
+  // ?service=groom etc. adds that service once (links from other pages)
+  var svc = params.get('service');
+  if (svc) {
+    var c = CATALOG.filter(function (x) { return x[3] === svc; })[0];
+    if (c && !st.items.some(function (i) { return i.name === c[2]; })) {
+      st.items.push({ id: Date.now() + Math.random(), name: c[2], price: c[1], pet: -1 });
+    }
+    history.replaceState(null, '', location.pathname + (st.doctor ? '?doctor=' + st.doctor : ''));
+  }
   if (st.pets.length === 1) st.items.forEach(function (i) { if (i.pet < 0) i.pet = 0; });
+  P.Cart.save(st.items);
 
   var $ = function (id) { return document.getElementById(id); };
   function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
@@ -32,7 +54,7 @@
   function render() {
     var items = st.items, pets = st.pets;
 
-    // Cart items
+    // Selected services
     $('cart-empty').hidden = items.length > 0;
     var list = $('cart-items'); list.innerHTML = '';
     items.forEach(function (it) {
@@ -52,7 +74,7 @@
           setItems(items.map(function (x) { return x.id === it.id ? Object.assign({}, x, { pet: pi }) : x; }));
         }, 'sm'));
       });
-      if (it.pet < 0) row.appendChild(el('span', null, pets.length ? 'Choose a pet' : 'Add a pet below')).style.cssText = 'font-size:14px;color:var(--gold-text)';
+      if (it.pet < 0) row.appendChild(el('span', null, pets.length ? 'Choose a pet' : 'Add your pet in step 3')).style.cssText = 'font-size:14px;color:var(--gold-text)';
       box.appendChild(row);
       list.appendChild(box);
     });
@@ -64,6 +86,10 @@
         setItems(items.concat([{ id: Date.now() + Math.random(), name: c[2], price: c[1], pet: pets.length === 1 ? 0 : -1 }]));
       }, 'add'));
     });
+
+    // Doctor
+    var dd = $('pick-doctor'); dd.innerHTML = '';
+    DOCTORS.forEach(function (d, i) { dd.appendChild(pill(d, st.doctor === i, function () { st.doctor = i; render(); })); });
 
     // Pets
     var pl = $('pet-list'); pl.innerHTML = '';
@@ -86,8 +112,8 @@
     ['Dog', 'Cat', 'Other'].forEach(function (t) { types.appendChild(pill(t, st.newType === t, function () { st.newType = t; render(); })); });
 
     // Day & time
-    var dd = $('pick-day'); dd.innerHTML = '';
-    DAYS.forEach(function (d, i) { dd.appendChild(pill(d, st.day === i, function () { st.day = i; render(); })); });
+    var dy = $('pick-day'); dy.innerHTML = '';
+    DAYS.forEach(function (d, i) { dy.appendChild(pill(d, st.day === i, function () { st.day = i; render(); })); });
     var tt = $('pick-time'); tt.innerHTML = '';
     TIMES.forEach(function (t, i) { tt.appendChild(pill(t, st.time === i, function () { st.time = i; $('error').textContent = ''; render(); })); });
 
@@ -97,6 +123,8 @@
     var d1 = st.first ? Math.round(sub * 0.2) : 0;
     var d2 = distinct >= 2 ? Math.round(sub * 0.1) : 0;
     var hasGroom = items.some(function (i) { return /Groom|Bath|Spa/.test(i.name); });
+    $('o-doctor').textContent = DOCTORS[st.doctor];
+    $('o-when').textContent = st.time < 0 ? 'Pick a time' : DAYS[st.day] + ', ' + TIMES[st.time];
     $('o-count').textContent = items.length;
     $('o-sub').textContent = P.fmt(sub);
     $('o-d1').textContent = d1 ? '−' + P.fmt(d1) : '₹0';
@@ -112,7 +140,7 @@
     if (!name) { $('pn').focus(); return; }
     st.pets = st.pets.concat([{ name: name, type: st.newType }]); savePets();
     $('pn').value = '';
-    if (st.pets.length === 1) { setItems(st.items.map(function (i) { return i.pet < 0 ? Object.assign({}, i, { pet: 0 }) : i; })); }
+    if (st.pets.length === 1) setItems(st.items.map(function (i) { return i.pet < 0 ? Object.assign({}, i, { pet: 0 }) : i; }));
     else render();
   });
 
@@ -121,36 +149,45 @@
   $('confirm').addEventListener('click', function () {
     var err = $('error');
     var owner = $('ow').value.trim(), phone = $('ph').value.trim();
-    if (!st.items.length) { err.textContent = 'Your cart is empty.'; return; }
-    if (st.items.some(function (i) { return i.pet < 0; })) { err.textContent = 'Choose a pet for every service.'; return; }
+    if (!st.items.length) { err.textContent = 'Please choose at least one service.'; return; }
+    if (!st.pets.length) { err.textContent = 'Please add your pet in step 3.'; return; }
+    if (st.items.some(function (i) { return i.pet < 0; })) { err.textContent = 'Choose which pet each service is for.'; return; }
     if (st.time < 0) { err.textContent = 'Please pick a time.'; return; }
     if (!owner || !phone) { err.textContent = 'Please add your name and phone number.'; return; }
+    err.textContent = '';
 
-    $('d-when').textContent = DAYS[st.day] + ' at ' + TIMES[st.time] + '. We will call or message ' + phone + ' to confirm.';
+    var when = DAYS[st.day] + ', ' + TIMES[st.time];
+    var fields = { 'Name': owner, 'Phone': phone, 'Doctor': DOCTORS[st.doctor], 'When': when };
     var g = $('d-groups'); g.innerHTML = '';
     st.pets.forEach(function (p, pi) {
-      var lines = st.items.filter(function (i) { return i.pet === pi; }).map(function (i) { return i.name; });
-      if (!lines.length) return;
+      var mine = st.items.filter(function (i) { return i.pet === pi; });
+      if (!mine.length) return;
+      fields['Pet: ' + p.name + ' (' + p.type + ')'] = mine.map(function (i) { return i.name + ' (' + P.fmt(i.price) + ')'; }).join(', ');
       var box = el('div'); box.style.cssText = 'background:var(--cream);border-radius:14px;padding:16px 20px';
       box.appendChild(el('b', null, p.name + ' (' + p.type + ')'));
-      box.appendChild(el('p', null, lines.join(', '))).style.fontSize = '15px';
+      box.appendChild(el('p', null, mine.map(function (i) { return i.name; }).join(', '))).style.fontSize = '15px';
       g.appendChild(box);
-    });
-    $('d-total').textContent = P.fmt(st.total);
-
-    var fields = { 'Name': owner, 'Phone': phone, 'When': DAYS[st.day] + ', ' + TIMES[st.time] };
-    st.pets.forEach(function (p, pi) {
-      var lines = st.items.filter(function (i) { return i.pet === pi; }).map(function (i) { return i.name + ' (' + P.fmt(i.price) + ')'; });
-      if (lines.length) fields['Pet: ' + p.name + ' (' + p.type + ')'] = lines.join(', ');
     });
     fields['First visit'] = st.first ? 'Yes (20% off)' : 'No';
     fields['Estimated total'] = P.fmt(st.total);
-    var sent = P.sendBooking('Cart booking: ' + st.items.length + ' service(s), ' + DAYS[st.day] + ' ' + TIMES[st.time], fields);
+
+    // Open WhatsApp first, straight from the click, so the browser allows it
+    var sent = P.sendBooking(st.items.length + ' service(s) with ' + DOCTORS[st.doctor] + ', ' + when, fields);
+
+    $('d-when').textContent = when + ' with ' + DOCTORS[st.doctor] + '. We will call or message ' + phone + ' to confirm.';
+    $('d-total').textContent = P.fmt(st.total);
     $('wa-link').href = sent.whatsappUrl;
     $('mail-link').href = sent.mailtoUrl;
-    $('cart-form').hidden = true; $('cart-summary').hidden = true; $('cart-done').hidden = false;
-    P.Cart.save([]);
-    ($('booking-done') || $('cart-done')).scrollIntoView({ behavior: 'smooth', block: 'start' });
+    $('book-form').hidden = true; $('book-summary').hidden = true; $('book-done').hidden = false;
+    st.items = []; P.Cart.save([]);
+    $('book-done').scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+
+  $('reset').addEventListener('click', function () {
+    st.time = -1;
+    $('book-form').hidden = false; $('book-summary').hidden = false; $('book-done').hidden = true;
+    render();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
   render();

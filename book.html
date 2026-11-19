@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Book an Appointment | PetCure Clinic</title>
-<meta name="description" content="Book a vet visit in three steps: choose a service, a doctor and a time.">
+<meta name="description" content="Book a vet visit, grooming or vaccination at PetCure Clinic, Bellandur. Choose services, a doctor and a time, then confirm on WhatsApp or call 0123456789.">
 <meta name="theme-color" content="#14233B">
 <link rel="icon" href="assets/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,86 +25,96 @@
     <div class="nav-links" id="nav-links">
       <a class="l" href="index.html">Home</a>
       <a class="l" href="services.html">Services</a>
-      <a class="l" href="grooming.html">Grooming</a>
-      <a class="l" href="vaccination.html">Vaccination</a>
+      <a class="l" href="care.html">Grooming &amp; Vaccination</a>
       <a class="l" href="pricing.html">Pricing &amp; Offers</a>
-      <a class="btn2" href="cart.html">Cart (<span data-cart-count>0</span>)</a>
-      <a class="btn" href="appointment.html">Book appointment</a>
+      <a class="btn" href="book.html" aria-current="page">Book appointment<span class="badge" data-cart-count hidden>0</span></a>
     </div>
   </nav>
 </header>
 <main id="main">
 <section class="bg-sand"><div class="wrap split page-hero" style="gap:32px;padding-top:48px;padding-bottom:48px">
   <div class="stack" style="gap:12px">
-  <span class="eyebrow">Doctor appointment</span>
-  <h1 class="h1-sm" style="font-size:48px">Book a visit in three steps</h1>
-  <p style="font-size:18px">Pick a service, a doctor and a time. We will confirm by phone or WhatsApp. Or simply call <a href="tel:+910123456789"><b>0123456789</b></a>.</p>
+  <span class="eyebrow">Book an appointment</span>
+  <h1 class="h1-sm" style="font-size:48px">Book a visit in under a minute</h1>
+  <p style="font-size:18px">Choose your services, a doctor and a time, then confirm on WhatsApp. Booking for more than one pet? Add them all here. Prefer to talk? Call <a href="tel:+910123456789"><b>0123456789</b></a>.</p>
   </div>
-  <img class="page-hero-img banner" src="assets/images/dogs-and-cat-portrait.jpg" alt="Three dogs and a cat posing together" width="540" height="360">
+  <img class="page-hero-img" src="assets/images/clinic-reception.jpg" alt="The bright reception desk at PetCure Clinic" width="1024" height="768">
 </div></section>
 
 <section class="sec" style="padding-top:48px"><div class="wrap split" style="gap:32px;align-items:start;grid-template-columns:repeat(auto-fit,minmax(320px,1fr))">
-  <div class="stack-lg" id="booking-form">
+  <div class="stack-lg" id="book-form">
     <div class="card call-card">
       <div class="stack" style="gap:6px"><h2 style="font-size:24px">Prefer to book by phone?</h2><p>Call us and book with Dr. Harish, Dr. Aparna or Dr. Siddarth. Open 7 days, 9 am – 8 pm.</p></div>
       <a class="btn" href="tel:+910123456789"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>Call 0123456789</a>
     </div>
-    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">1. Choose a service</h2><div class="pills" id="pick-service" role="group" aria-label="Service"></div></div>
-    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">2. Choose a doctor</h2><div class="pills" id="pick-doctor" role="group" aria-label="Doctor"></div></div>
-    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">3. Pick a day and time</h2>
-      <div class="pills" id="pick-day" role="group" aria-label="Day" style="margin-bottom:16px"></div>
-      <div class="pills" id="pick-time" role="group" aria-label="Time"></div>
+    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">1. Choose services</h2>
+      <p id="cart-empty" hidden>Nothing selected yet. Tap a service below, or browse <a href="services.html">Services</a> and <a href="care.html">Grooming &amp; Vaccination</a>.</p>
+      <div class="stack" id="cart-items"></div>
+      <p style="font-weight:700;font-size:15px;margin:20px 0 10px">Add a service</p>
+      <div class="pills" id="catalog"></div>
     </div>
-    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">Your details</h2>
+    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">2. Choose a doctor</h2><div class="pills" id="pick-doctor" role="group" aria-label="Doctor"></div></div>
+    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">3. Your pets</h2>
+      <div class="pills" id="pet-list" style="margin-bottom:16px"></div>
+      <form class="row" id="pet-form" style="align-items:flex-end">
+        <div class="field" style="flex:1 1 180px"><label for="pn">Pet's name</label><input id="pn" autocomplete="off"></div>
+        <div class="pills" id="pet-types" role="group" aria-label="Pet type" style="gap:8px"></div>
+        <button class="btn2" type="submit">Add pet</button>
+      </form>
+    </div>
+    <div class="card"><h2 style="font-size:24px;margin-bottom:16px">4. Day, time and your details</h2>
+      <div class="pills" id="pick-day" role="group" aria-label="Day" style="margin-bottom:12px"></div>
+      <div class="pills" id="pick-time" role="group" aria-label="Time" style="margin-bottom:20px"></div>
       <div class="fields">
-        <div class="field"><label for="owner">Your name</label><input id="owner" autocomplete="name"></div>
-        <div class="field"><label for="phone">Phone number</label><input id="phone" type="tel" autocomplete="tel"></div>
-        <div class="field"><label for="pet">Pet's name and type</label><input id="pet" placeholder="e.g. Bruno, dog"></div>
+        <div class="field"><label for="ow">Your name</label><input id="ow" autocomplete="name"></div>
+        <div class="field"><label for="ph">Phone number</label><input id="ph" type="tel" autocomplete="tel"></div>
       </div>
       <label class="checkbox"><input type="checkbox" id="first" checked><span>This is our first visit (20% off)</span></label>
     </div>
   </div>
 
-  <aside class="card summary" id="booking-summary" aria-live="polite">
-    <img src="assets/images/golden-retriever-portrait.jpg" alt="" style="width:100%;height:150px;object-fit:cover;border-radius:14px;object-position:center 25%">
+  <aside class="card summary" id="book-summary" aria-live="polite">
+    <img src="assets/images/puppies-and-kittens-row.jpg" alt="" width="738" height="276" style="width:100%;border-radius:14px">
     <h2 style="font-size:24px">Booking summary</h2>
-    <div class="between"><span>Service</span><b id="s-service"></b></div>
-    <div class="between"><span>Doctor</span><b id="s-doctor"></b></div>
-    <div class="between"><span>When</span><b id="s-when"></b></div>
+    <div class="between"><span>Doctor</span><b id="o-doctor"></b></div>
+    <div class="between"><span>When</span><b id="o-when"></b></div>
     <hr>
-    <div class="between"><span>Starting price</span><b id="s-base"></b></div>
-    <div class="between" style="color:var(--navy)"><span>First-visit discount</span><b id="s-disc"></b></div>
-    <div class="between" style="font-size:20px"><span>Estimated total</span><b id="s-total"></b></div>
-    <p style="font-size:14px;color:var(--muted)">Final cost is confirmed by your vet. Includes complimentary health snapshot.</p>
+    <div class="between"><span>Services (<span id="o-count">0</span>)</span><b id="o-sub"></b></div>
+    <div class="between" style="color:var(--navy)"><span>First-visit discount (20%)</span><b id="o-d1"></b></div>
+    <div class="between" style="color:var(--navy)"><span>Multi-pet discount (10%)</span><b id="o-d2"></b></div>
+    <hr>
+    <div class="between" style="font-size:22px"><span>Estimated total</span><b id="o-total"></b></div>
+    <div style="background:var(--wheat);border-radius:14px;padding:14px 16px"><p style="font-weight:700;font-size:15px;color:var(--gold-text)">Complimentary with your booking</p><p style="font-size:15px" id="o-free"></p></div>
     <button class="btn btn-wa" type="button" id="confirm"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.8 14.1c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.2-4.6c-.4-.5-1.3-1.7-1.3-3.3s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.8-.1 1.5z"/></svg>Confirm booking on WhatsApp</button>
     <p style="font-size:14px;color:var(--muted)">Your booking opens in WhatsApp, ready to send to the clinic. Tap <b>Send</b> to finish. Prefer to talk? <a href="tel:+910123456789">Call 0123456789</a>.</p>
     <p class="error" id="error" role="alert"></p>
+    <p style="font-size:14px;color:var(--muted)">Pay at the clinic. Final cost is confirmed by your vet.</p>
   </aside>
 
-  <div class="card done-card" id="booking-done" hidden style="text-align:center;align-items:center;padding:48px">
-    <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#14233B"/><path d="M19 33l9 9 17-19" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    <h2 style="font-size:32px">One last tap: send it on WhatsApp</h2>
-    <p id="d-what"></p>
-    <p id="d-msg"></p>
-    <div class="done-actions">
+  <div class="card done-card" id="book-done" hidden>
+    <div class="row" style="gap:16px"><svg width="56" height="56" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#14233B"/><path d="M19 33l9 9 17-19" fill="none" stroke="#E3C98B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg><h2 style="font-size:32px">One last tap: send it on WhatsApp</h2></div>
+    <p id="d-when"></p>
+    <div class="stack" id="d-groups" style="gap:12px"></div>
+    <p><b>Estimated total <span id="d-total"></span></b>, paid at the clinic.</p>
+    <div class="done-actions" style="justify-content:flex-start">
       <a class="btn btn-wa" id="wa-link" href="#" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.8 14.1c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.2-4.6c-.4-.5-1.3-1.7-1.3-3.3s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.8-.1 1.5z"/></svg>Open WhatsApp again</a>
       <a class="btn2" href="tel:+910123456789"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg>Call 0123456789</a>
     </div>
     <p class="status-note">WhatsApp should have opened with your booking typed out. Tap <b>Send</b> there and we will confirm your slot. If WhatsApp did not open, use the button above, <a id="mail-link" href="#">send it by email</a>, or call us.</p>
-    <button class="btn2" type="button" id="reset" style="box-shadow:none;text-decoration:underline">Make another booking</button>
+    <button class="btn2" type="button" id="reset" style="align-self:flex-start;box-shadow:none;text-decoration:underline">Make another booking</button>
   </div>
 </div></section>
 </main>
 <footer class="site-footer">
   <div class="wrap">
     <div><p class="name">PetCure Clinic</p><p style="margin-top:8px;font-size:15px">A-xyz, Bellandur,<br>Bengaluru, Karnataka<br><a href="tel:+910123456789">0123456789</a><br><a href="mailto:petcure@gmail.com">petcure@gmail.com</a><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Bellandur%2C+Bengaluru%2C+Karnataka" target="_blank" rel="noopener">Get directions →</a></p><p style="margin-top:12px;font-size:15px">Open 7 days, 9:00 am – 8:00 pm</p></div>
-    <div class="col"><a href="services.html">Services</a><a href="grooming.html">Grooming</a><a href="vaccination.html">Vaccination</a></div>
-    <div class="col"><a href="appointment.html">Book appointment</a><a href="pricing.html">Pricing &amp; offers</a><a href="pricing.html#reviews">Reviews</a><a href="cart.html">Cart</a></div>
+    <div class="col"><a href="services.html">Services</a><a href="care.html#grooming">Grooming</a><a href="care.html#vaccination">Vaccination</a></div>
+    <div class="col"><a href="book.html">Book appointment</a><a href="pricing.html">Pricing &amp; offers</a><a href="pricing.html#reviews">Reviews</a></div>
     <div style="font-size:15px"><p><strong>Emergency?</strong></p><p>Call us first, any time:</p><p style="margin-top:6px"><a href="tel:+919876543210" style="color:#E3C98B;font-weight:700;font-size:20px">98765 43210</a></p><p style="margin-top:6px">24/7 emergency line</p></div>
   </div>
   <p class="copyright">&copy; <span id="year">2026</span> PetCure Clinic. All rights reserved.</p>
 </footer>
 <script src="js/main.js"></script>
-<script src="js/appointment.js"></script>
+<script src="js/book.js"></script>
 </body>
 </html>

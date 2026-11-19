@@ -2,23 +2,21 @@
 
 A static website for PetCure Clinic, a veterinary hospital and pet spa. It is built from the "PetCure Clinic – Website Design" spec.
 
-## Pages
+## Pages (5)
 
 | Page | File |
 |---|---|
 | Home | `index.html` |
 | Services and doctors | `services.html` |
-| Grooming and spa | `grooming.html` |
-| Vaccination | `vaccination.html` |
+| Grooming & Vaccination | `care.html` |
 | Pricing, offers and reviews | `pricing.html` |
-| Book an appointment | `appointment.html` |
-| Cart and multi-pet booking | `cart.html` |
+| Book an appointment (services, doctor, pets, time) | `book.html` |
 
 ## Features
 - Responsive layout, with a mobile menu below 1060px.
-- "Add to cart" buttons on Services, Grooming and Vaccination. The cart is stored in `localStorage` (`petcure_cart`), and the count in the header updates.
-- Cart page: assign services to pets, add or remove pets, pick a day and time. It applies the first-visit (20%) and multi-pet (10%) discounts.
-- Appointment page: choose a service, doctor and time, with a live price summary. Deep links work, e.g. `appointment.html?service=2` or `?doctor=1`.
+- "Add to booking" buttons on Services and Grooming & Vaccination. Selections are stored in `localStorage` (`petcure_cart`), and a count badge appears on the header's Book button.
+- Multi-pet booking applies the first-visit (20%) and multi-pet (10%) discounts.
+- Book page: choose services, a doctor, your pets and a time, with a live price summary. Deep links work, e.g. `book.html?service=groom` or `book.html?doctor=1`.
 - Booking days are the next six days from today.
 
 ## How bookings reach the clinic
