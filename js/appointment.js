@@ -4,7 +4,7 @@
   var P = window.PetCure;
 
   var SERVICES = [['General check-up', 500], ['Vaccination', 600], ['Grooming', 700], ['Dental care', 1800], ['Diagnostics', 400]];
-  var DOCTORS = ['Any available doctor', 'Dr. [Name] A', 'Dr. [Name] B', 'Dr. [Name] C'];
+  var DOCTORS = ['Any available doctor', 'Dr. Harish', 'Dr. Aparna', 'Dr. Siddarth'];
   var DAYS = P.upcomingDays(6);
   var TIMES = P.TIMES;
 

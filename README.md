@@ -29,4 +29,4 @@ python3 -m http.server 8000
 ```
 
 ## Before launch
-Replace the placeholders: address, phone, email, emergency number, doctor names and bios, the sample reviews and prices. Bookings are client-side only, so connect `confirm` in `js/appointment.js` and `js/cart.js` to a backend or form service to receive them.
+The clinic details, doctors and prices are filled in. The reviews are still labelled samples, so swap in real customer reviews once you have them. Bookings are client-side only, so connect `confirm` in `js/appointment.js` and `js/cart.js` to a backend or form service to receive them.
