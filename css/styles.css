@@ -277,3 +277,11 @@ a.card:hover { box-shadow: 0 0 0 1px var(--line), 0 12px 28px rgba(20, 35, 59, .
   .quick-btn { padding: 0; width: 44px; justify-content: center; }
   .brand span { font-size: 19px; }
 }
+
+/* Clinic sign & waiting area */
+.clinic-photos { display: grid; grid-template-columns: 1.35fr 1fr; gap: 24px; align-items: center; margin-bottom: 24px; }
+.clinic-photos figure { margin: 0; display: flex; flex-direction: column; gap: 10px; }
+.clinic-photos figcaption { font-size: 14px; color: var(--muted); }
+.signboard { width: 100%; height: auto; display: block; filter: drop-shadow(0 16px 30px rgba(20, 35, 59, .25)); }
+.room-fig img { width: 100%; aspect-ratio: 588 / 340; object-fit: cover; border-radius: 20px; box-shadow: 0 16px 40px rgba(20, 35, 59, .15); }
+@media (max-width: 860px) { .clinic-photos { grid-template-columns: 1fr; } }

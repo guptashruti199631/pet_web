@@ -32,6 +32,10 @@ The phone, WhatsApp and email settings live at the top of `js/main.js` (`CLINIC`
 ## Publishing on GitHub Pages
 Repo **Settings → Pages → Build and deployment**: Source "Deploy from a branch", branch `claude/nifty-pascal-1ht4kt`, folder `/ (root)`, then **Save**. The site goes live at `https://guptashruti199631.github.io/pet_web/` within a couple of minutes.
 
+## Signboard
+- `assets/signboard.svg`: the clinic front signboard design, a vector file that scales to any size. Give this to the sign maker.
+- `assets/signboard-print.png`: a 4800 × 1680 px image of the same design for quick previews or printing.
+
 ## Run locally
 No build step. Open `index.html`, or serve the folder:
 
