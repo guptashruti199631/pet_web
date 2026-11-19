@@ -22,12 +22,15 @@ A static website for PetCure Clinic, a veterinary hospital and pet spa. It is bu
 - Booking days are the next six days from today.
 
 ## How bookings reach the clinic
-When a customer confirms on the Appointment or Cart page:
-1. **Email:** the booking is emailed to `petcure@gmail.com` through [FormSubmit](https://formsubmit.co) (free, no account needed). **The very first booking triggers an activation email from FormSubmit. Open it and click "Activate Form"**, otherwise later bookings won't be delivered.
-2. **WhatsApp:** the confirmation screen shows a "Send booking on WhatsApp" button. It opens WhatsApp with the full booking typed out, addressed to the clinic's WhatsApp number.
-3. **Phone:** "Call to book" buttons appear on every page (a bottom bar on mobile), the doctor cards, and the booking pages.
+No third-party service or setup is needed, and every booking works the same way, first or fiftieth:
+1. **WhatsApp:** "Confirm booking on WhatsApp" opens WhatsApp with the whole booking typed out (name, phone, pet, service, doctor, date and time, price), addressed to the clinic's WhatsApp number **98765 43210**. The customer taps **Send**.
+2. **Phone:** Call buttons for **0123456789** are in the header on phones and tablets, on the booking pages and on the doctor cards.
+3. **Email (backup):** if WhatsApp isn't available, the confirmation screen offers "send it by email", which opens the customer's email app addressed to petcure@gmail.com.
 
-The phone, WhatsApp and email settings live at the top of `js/main.js` (`CLINIC`). The numbers also appear as `tel:` and `wa.me` links in the HTML, so search and replace them if they change.
+The phone, WhatsApp and email settings live at the top of `js/main.js` (`CLINIC`). The numbers also appear as `tel:` and `wa.me` links in the HTML.
+
+## Publishing on GitHub Pages
+Repo **Settings → Pages → Build and deployment**: Source "Deploy from a branch", branch `claude/nifty-pascal-1ht4kt`, folder `/ (root)`, then **Save**. The site goes live at `https://guptashruti199631.github.io/pet_web/` within a couple of minutes.
 
 ## Run locally
 No build step. Open `index.html`, or serve the folder:
@@ -37,4 +40,4 @@ python3 -m http.server 8000
 ```
 
 ## Before launch
-The clinic details, doctors and prices are filled in. The reviews are still labelled samples, so swap in real customer reviews once you have them. Activate FormSubmit (see above) after the first test booking.
+The clinic details, doctors and prices are filled in. The reviews are still labelled samples, so swap in real customer reviews once you have them.

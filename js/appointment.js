@@ -45,13 +45,7 @@
 
   function showSendStatus(sent) {
     $('wa-link').href = sent.whatsappUrl;
-    var note = $('email-status');
-    note.textContent = 'Sending your booking to the clinic…';
-    sent.emailed.then(function (ok) {
-      note.textContent = ok
-        ? 'Your booking has been sent to the clinic. For a faster reply, send it on WhatsApp or give us a call.'
-        : 'We could not send your booking automatically. Please tap "Send booking on WhatsApp" or call us to confirm.';
-    });
+    $('mail-link').href = sent.mailtoUrl;
   }
 
   $('first').addEventListener('change', function (e) { st.first = e.target.checked; render(); });

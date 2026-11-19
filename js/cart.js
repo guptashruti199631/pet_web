@@ -147,12 +147,7 @@
     fields['Estimated total'] = P.fmt(st.total);
     var sent = P.sendBooking('Cart booking: ' + st.items.length + ' service(s), ' + DAYS[st.day] + ' ' + TIMES[st.time], fields);
     $('wa-link').href = sent.whatsappUrl;
-    var note = $('email-status');
-    sent.emailed.then(function (ok) {
-      note.textContent = ok
-        ? 'Your booking has been sent to the clinic. For a faster reply, send it on WhatsApp or give us a call.'
-        : 'We could not send your booking automatically. Please tap "Send booking on WhatsApp" or call us to confirm.';
-    });
+    $('mail-link').href = sent.mailtoUrl;
     $('cart-form').hidden = true; $('cart-summary').hidden = true; $('cart-done').hidden = false;
     P.Cart.save([]);
     ($('booking-done') || $('cart-done')).scrollIntoView({ behavior: 'smooth', block: 'start' });

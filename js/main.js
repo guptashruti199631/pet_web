@@ -9,21 +9,20 @@
     phone: '0123456789',            // number customers call to book
     phoneDisplay: '0123456789',
     whatsapp: '919876543210',       // WhatsApp number, with country code 91, no + or spaces
-    email: 'petcure@gmail.com'      // booking emails are delivered here (via FormSubmit)
+    email: 'petcure@gmail.com'      // used for the "send by email instead" link
   };
 
-  // Sends the booking to the clinic's email (FormSubmit) and returns a WhatsApp link with the same text.
-  // The first booking ever sent triggers a one-time activation email from FormSubmit to CLINIC.email.
+  // Builds the booking message and opens WhatsApp addressed to the clinic.
+  // No third-party service and no setup: every booking, first or fiftieth, goes the same way.
+  // Must be called directly from a click handler so the browser allows the new window.
   function sendBooking(subject, fields) {
     var lines = Object.keys(fields).map(function (k) { return k + ': ' + fields[k]; });
-    var text = 'New booking: PetCure Clinic\n' + subject + '\n\n' + lines.join('\n');
-    var payload = Object.assign({ _subject: subject, _template: 'table', _captcha: 'false' }, fields);
-    var request = fetch('https://formsubmit.co/ajax/' + encodeURIComponent(CLINIC.email), {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-      body: JSON.stringify(payload)
-    }).then(function (r) { return r.ok; }).catch(function () { return false; });
-    return { emailed: request, whatsappUrl: 'https://wa.me/' + CLINIC.whatsapp + '?text=' + encodeURIComponent(text) };
+    var text = 'New booking - PetCure Clinic\n' + subject + '\n\n' + lines.join('\n');
+    var whatsappUrl = 'https://wa.me/' + CLINIC.whatsapp + '?text=' + encodeURIComponent(text);
+    var mailtoUrl = 'mailto:' + CLINIC.email + '?subject=' + encodeURIComponent('Booking: ' + subject) + '&body=' + encodeURIComponent(text);
+    var win = window.open(whatsappUrl, '_blank');
+    if (win) { try { win.opener = null; } catch (e) { /* ignore */ } }
+    return { whatsappUrl: whatsappUrl, mailtoUrl: mailtoUrl, opened: !!win };
   }
 
   var Cart = {
