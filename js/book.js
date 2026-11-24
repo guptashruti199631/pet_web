@@ -6,14 +6,19 @@
 
   var DAYS = P.upcomingDays(6);
   var TIMES = P.TIMES;
-  var DOCTORS = ['Any available doctor', 'Dr. Harish', 'Dr. Aparna', 'Dr. Siddarth'];
+  var CFG = window.CLINIC_CONFIG || {};
+  var DOCTORS = ['Any available doctor'].concat((CFG.doctors || []).map(function (d) { return d.name; }));
+  if (DOCTORS.length === 1) DOCTORS = DOCTORS.concat(['Dr. Harish', 'Dr. Aparna', 'Dr. Siddarth']);
   // [button label, price, name in booking, ?service= key]
+  // [button label, default price, name in booking, ?service= key, price key in js/config.js]
   var CATALOG = [
-    ['Check-up', 500, 'General check-up', 'checkup'], ['Puppy / kitten shot', 600, 'Puppy / kitten shot', 'vaccine'],
-    ['Rabies', 400, 'Rabies', 'rabies'], ['Booster', 700, 'Adult booster', 'booster'],
-    ['Basic Bath', 700, 'Basic Bath', 'bath'], ['Full Groom', 1300, 'Full Groom', 'groom'], ['Spa Day', 2000, 'Spa Day', 'spa'],
-    ['Dental', 1800, 'Dental care', 'dental'], ['Blood test', 400, 'Blood tests', 'bloodtest']
+    ['Check-up', 500, 'General check-up', 'checkup', 'checkup'], ['Puppy / kitten shot', 600, 'Puppy / kitten shot', 'vaccine', 'vaccine_shot'],
+    ['Rabies', 400, 'Rabies', 'rabies', 'rabies'], ['Booster', 700, 'Adult booster', 'booster', 'booster'],
+    ['Basic Bath', 700, 'Basic Bath', 'bath', 'basic_bath'], ['Full Groom', 1300, 'Full Groom', 'groom', 'full_groom'], ['Spa Day', 2000, 'Spa Day', 'spa', 'spa_day'],
+    ['Dental', 1800, 'Dental care', 'dental', 'dental'], ['Blood test', 400, 'Blood tests', 'bloodtest', 'diagnostics']
   ];
+  var PRICES = CFG.prices || {};
+  CATALOG.forEach(function (c) { if (typeof PRICES[c[4]] === 'number') c[1] = PRICES[c[4]]; });
 
   function readPets() {
     try { var v = localStorage.getItem(PETS_KEY); return v ? JSON.parse(v) : []; } catch (e) { return []; }

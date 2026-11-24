@@ -80,23 +80,23 @@
     <div class="card stack" style="gap:14px">
       <span class="eyebrow" style="min-height:18px;letter-spacing:.1em"></span>
       <h3 style="font-size:28px">Basic Bath</h3>
-      <p><span style="font-family:var(--serif);font-size:40px;font-weight:700">₹700</span> <span style="font-size:15px">starting, small dog or cat</span></p>
+      <p><span style="font-family:var(--serif);font-size:40px;font-weight:700"><span data-cost="basic_bath">₹700</span></span> <span style="font-size:15px">starting, small dog or cat</span></p>
       <ul style="gap:8px"><li>Shampoo bath and blow-dry</li><li>Brush-out</li><li>Nail trim</li><li>Ear cleaning</li></ul>
-      <div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Basic Bath" data-price="700">Add to booking</button></div>
+      <div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Basic Bath" data-cost-key="basic_bath" data-price="700">Add to booking</button></div>
     </div>
     <div class="card stack" style="gap:14px;box-shadow:0 0 0 3px var(--gold)">
       <span class="eyebrow" style="min-height:18px;letter-spacing:.1em">Most popular</span>
       <h3 style="font-size:28px">Full Groom</h3>
-      <p><span style="font-family:var(--serif);font-size:40px;font-weight:700">₹1,300</span> <span style="font-size:15px">starting, small dog or cat</span></p>
+      <p><span style="font-family:var(--serif);font-size:40px;font-weight:700"><span data-cost="full_groom">₹1,300</span></span> <span style="font-size:15px">starting, small dog or cat</span></p>
       <ul style="gap:8px"><li>Everything in Basic Bath</li><li>Haircut and styling</li><li>Sanitary trim</li><li>Teeth brushing</li></ul>
-      <div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Full Groom" data-price="1300">Add to booking</button></div>
+      <div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Full Groom" data-cost-key="full_groom" data-price="1300">Add to booking</button></div>
     </div>
     <div class="card stack" style="gap:14px">
       <span class="eyebrow" style="min-height:18px;letter-spacing:.1em"></span>
       <h3 style="font-size:28px">Spa Day</h3>
-      <p><span style="font-family:var(--serif);font-size:40px;font-weight:700">₹2,000</span> <span style="font-size:15px">starting, small dog or cat</span></p>
+      <p><span style="font-family:var(--serif);font-size:40px;font-weight:700"><span data-cost="spa_day">₹2,000</span></span> <span style="font-size:15px">starting, small dog or cat</span></p>
       <ul style="gap:8px"><li>Everything in Full Groom</li><li>Aromatherapy conditioning</li><li>Paw balm and massage</li><li>De-shedding treatment</li></ul>
-      <div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Spa Day" data-price="2000">Add to booking</button></div>
+      <div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Spa Day" data-cost-key="spa_day" data-price="2000">Add to booking</button></div>
     </div>
   </div>
 </div></section>
@@ -106,20 +106,20 @@
     <h2 class="h2-flush" style="font-size:32px;margin-bottom:20px">Price by size</h2>
     <div class="table">
       <div><span>Small (up to 8 kg)</span><b>+ ₹0</b></div>
-      <div><span>Medium (8–20 kg)</span><b>+ ₹300</b></div>
-      <div><span>Large (20–35 kg)</span><b>+ ₹600</b></div>
-      <div><span>Giant (35 kg+)</span><b>+ ₹900</b></div>
+      <div><span>Medium (8–20 kg)</span><b>+ <span data-cost="size_medium">₹300</span></b></div>
+      <div><span>Large (20–35 kg)</span><b>+ <span data-cost="size_large">₹600</span></b></div>
+      <div><span>Giant (35 kg+)</span><b>+ <span data-cost="size_giant">₹900</span></b></div>
     </div>
     <p style="font-size:14px;margin-top:12px;color:var(--muted)">Added to the package starting price. Heavily matted coats may cost extra.</p>
   </div>
   <div>
     <h2 class="h2-flush" style="font-size:32px;margin-bottom:20px">Add-ons</h2>
     <div class="table">
-      <div><span>Flea and tick treatment</span><b>₹450</b></div>
-      <div><span>Medicated shampoo</span><b>₹300</b></div>
-      <div><span>Teeth scaling (light)</span><b>₹350</b></div>
-      <div><span>Coat colouring (pet-safe)</span><b>₹600</b></div>
-      <div><span>Pick-up and drop-off</span><b>₹250</b></div>
+      <div><span>Flea and tick treatment</span><b><span data-cost="flea_tick">₹450</span></b></div>
+      <div><span>Medicated shampoo</span><b><span data-cost="medicated_shampoo">₹300</span></b></div>
+      <div><span>Teeth scaling (light)</span><b><span data-cost="teeth_scaling">₹350</span></b></div>
+      <div><span>Coat colouring (pet-safe)</span><b><span data-cost="coat_colouring">₹600</span></b></div>
+      <div><span>Pick-up and drop-off</span><b><span data-cost="pickup_drop">₹250</span></b></div>
     </div>
   </div>
 </div></section>
@@ -188,12 +188,12 @@
   <span class="eyebrow">Vaccination pricing</span>
   <h2 class="h2">Clear prices, no surprises</h2>
   <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(240px,1fr))">
-    <div class="card card-cream stack" style="gap:8px"><h3 style="font-size:22px">Puppy / kitten shot</h3><p class="rating-big" style="font-size:34px">₹600</p><p>Per dose of the combination vaccine.</p><div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Puppy / kitten shot" data-price="600">Add to booking</button></div></div>
-    <div class="card card-cream stack" style="gap:8px"><h3 style="font-size:22px">Rabies</h3><p class="rating-big" style="font-size:34px">₹400</p><p>Includes certificate.</p><div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Rabies" data-price="400">Add to booking</button></div></div>
-    <div class="card card-cream stack" style="gap:8px"><h3 style="font-size:22px">Adult booster</h3><p class="rating-big" style="font-size:34px">₹700</p><p>Annual combination booster.</p><div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Adult booster" data-price="700">Add to booking</button></div></div>
-    <div class="card card-cream stack" style="gap:8px"><h3 style="font-size:22px">Lifestyle vaccines</h3><p class="rating-big" style="font-size:34px">from ₹650</p><p>Kennel cough and others, if your vet advises.</p><div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Lifestyle vaccines" data-price="650">Add to booking</button></div></div>
+    <div class="card card-cream stack" style="gap:8px"><h3 style="font-size:22px">Puppy / kitten shot</h3><p class="rating-big" style="font-size:34px"><span data-cost="vaccine_shot">₹600</span></p><p>Per dose of the combination vaccine.</p><div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Puppy / kitten shot" data-cost-key="vaccine_shot" data-price="600">Add to booking</button></div></div>
+    <div class="card card-cream stack" style="gap:8px"><h3 style="font-size:22px">Rabies</h3><p class="rating-big" style="font-size:34px"><span data-cost="rabies">₹400</span></p><p>Includes certificate.</p><div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Rabies" data-cost-key="rabies" data-price="400">Add to booking</button></div></div>
+    <div class="card card-cream stack" style="gap:8px"><h3 style="font-size:22px">Adult booster</h3><p class="rating-big" style="font-size:34px"><span data-cost="booster">₹700</span></p><p>Annual combination booster.</p><div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Adult booster" data-cost-key="booster" data-price="700">Add to booking</button></div></div>
+    <div class="card card-cream stack" style="gap:8px"><h3 style="font-size:22px">Lifestyle vaccines</h3><p class="rating-big" style="font-size:34px">from <span data-cost="lifestyle">₹650</span></p><p>Kennel cough and others, if your vet advises.</p><div style="margin-top:auto;padding-top:8px"><button class="btn" type="button" data-add="Lifestyle vaccines" data-cost-key="lifestyle" data-price="650">Add to booking</button></div></div>
   </div>
-  <div class="card card-cream mini-feature"><img src="assets/images/brown-rabbit.jpg" alt="A brown rabbit sitting quietly" width="284" height="177"><div class="stack" style="gap:6px"><h3 style="font-size:22px">Rabbits and birds too</h3><p>Dr. Siddarth vaccinates and checks rabbits, guinea pigs and birds. Call <a href="tel:+910123456789">0123456789</a> to ask what your small pet needs.</p></div></div>
+  <div class="card card-cream mini-feature"><img src="assets/images/brown-rabbit.jpg" alt="A brown rabbit sitting quietly" width="284" height="177"><div class="stack" style="gap:6px"><h3 style="font-size:22px">Rabbits and birds too</h3><p><span data-doc="2" data-doc-field="name">Dr. Siddarth</span> vaccinates and checks rabbits, guinea pigs and birds. Call <a href="tel:+910123456789">0123456789</a> to ask what your small pet needs.</p></div></div>
 </div></section>
 
 <section class="bg-wheat"><div class="wrap sec split" style="gap:32px">
@@ -201,7 +201,7 @@
     <span class="eyebrow">Vaccination offers</span>
     <h2 class="h2-flush" style="font-size:38px">Save 15% with a yearly bundle</h2>
     <p>Book the full year of shots, boosters and check-ups together and pay once.</p>
-    <div class="row"><button class="btn" type="button" data-add="Yearly vaccination bundle" data-price="2400">Add bundle · ₹2,400</button><a class="btn2" href="book.html?service=vaccine">Book a visit</a></div>
+    <div class="row"><button class="btn" type="button" data-add="Yearly vaccination bundle" data-cost-key="vaccine_bundle" data-price="2400">Add bundle · <span data-cost="vaccine_bundle">₹2,400</span></button><a class="btn2" href="book.html?service=vaccine">Book a visit</a></div>
   </div>
   <div class="stack" style="gap:14px">
     <div class="card" style="padding:20px 24px"><p style="font-weight:700">Free health check</p><p style="font-size:15px">A quick exam before every vaccine, at no charge.</p></div>
@@ -234,6 +234,7 @@
   </div>
   <p class="copyright">&copy; <span id="year">2026</span> PetCure Clinic. All rights reserved.</p>
 </footer>
+<script src="js/config.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>

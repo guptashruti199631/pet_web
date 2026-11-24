@@ -27,6 +27,9 @@ No third-party service or setup is needed, and every booking works the same way,
 
 The phone, WhatsApp and email settings live at the top of `js/main.js` (`CLINIC`). The numbers also appear as `tel:` and `wa.me` links in the HTML.
 
+## Changing doctors and prices
+All doctor names, roles, bios and prices live in **`js/config.js`**. Edit that one file (on GitHub, click the pencil icon) and every page updates. See **`HOW-TO-UPDATE.md`** for step-by-step instructions.
+
 ## Customer reviews
 The **Write a review** form is on the Pricing page (`pricing.html#write-review`), linked from the home page and every footer. Customers choose a star rating, the service they used, their name and pet, and write their feedback, then tap **Send review on WhatsApp**. WhatsApp opens with the review typed out, addressed to the clinic (with email as a backup). The message says whether the customer agrees to have it shown on the website.
 

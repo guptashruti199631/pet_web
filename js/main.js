@@ -82,7 +82,31 @@
   window.PetCure = { Cart: Cart, fmt: fmt, toast: showToast, upcomingDays: upcomingDays, CLINIC: CLINIC, sendBooking: sendBooking,
     TIMES: ['10:00 am', '11:30 am', '2:00 pm', '3:30 pm', '5:00 pm', '6:30 pm'] };
 
+  // Fill doctor names and prices from js/config.js (the settings file)
+  function applyConfig() {
+    var C = window.CLINIC_CONFIG;
+    if (!C) return;
+    var prices = C.prices || {}, docs = C.doctors || [];
+    document.querySelectorAll('[data-cost]').forEach(function (el) {
+      var v = prices[el.getAttribute('data-cost')];
+      if (typeof v === 'number') el.textContent = fmt(v);
+    });
+    document.querySelectorAll('[data-cost-key]').forEach(function (el) {
+      var v = prices[el.getAttribute('data-cost-key')];
+      if (typeof v === 'number') el.setAttribute('data-price', v);
+    });
+    document.querySelectorAll('[data-doc]').forEach(function (el) {
+      var d = docs[Number(el.getAttribute('data-doc'))];
+      if (!d) return;
+      var f = el.getAttribute('data-doc-field');
+      if (f === 'initial') el.textContent = (d.name || '').replace(/^Dr\.?\s*/i, '').charAt(0).toUpperCase();
+      else if (d[f]) el.textContent = d[f];
+    });
+  }
+  window.PetCure.applyConfig = applyConfig;
+
   document.addEventListener('DOMContentLoaded', function () {
+    applyConfig();
     Cart.updateCount();
 
     // Mobile menu
