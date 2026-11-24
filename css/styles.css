@@ -321,3 +321,21 @@ a.card:hover { box-shadow: 0 0 0 1px var(--line), 0 12px 28px rgba(20, 35, 59, .
 .hero-wide > .eyebrow, .hero-wide > h1, .hero-wide > p { grid-column: 1; }
 .hero-wide > .row { grid-column: 2; grid-row: 2 / span 2; align-self: end; }
 @media (max-width: 860px) { .hero-wide { display: flex; } }
+
+/* Write a review */
+.sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.rating-field { border: 0; margin: 0; padding: 0; }
+.rating-field legend, .field .label { font-weight: 700; font-size: 15px; margin-bottom: 8px; padding: 0; }
+.star-input { display: inline-flex; flex-direction: row-reverse; gap: 4px; }
+.star-input input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+.star-input label { cursor: pointer; width: 44px; height: 44px; display: inline-flex; align-items: center; justify-content: center; border-radius: 10px; }
+.star-input svg { width: 36px; height: 36px; fill: #E6DECF; transition: fill .12s, transform .12s; }
+.star-input label:hover svg, .star-input label:hover ~ label svg,
+.star-input input:checked ~ label svg { fill: var(--gold); }
+.star-input label:hover svg { transform: scale(1.08); }
+.star-input input:focus-visible + label { outline: 3px solid var(--gold); outline-offset: 2px; }
+.rating-label { font-size: 14px; color: var(--muted); margin-top: 4px; min-height: 22px; }
+.field textarea { border-radius: 12px; border: 1.5px solid var(--field); padding: 12px 14px; font-size: 16px; font-family: inherit; resize: vertical; min-height: 120px; line-height: 1.5; background: #fff; }
+.field textarea:focus { border-color: var(--navy); outline: none; box-shadow: 0 0 0 3px rgba(201, 164, 92, .35); }
+.char-count { font-size: 13px; color: var(--muted); align-self: flex-end; }
+#review-done { grid-column: auto; max-width: none; }

@@ -37,7 +37,7 @@
     <span class="eyebrow">Pricing &amp; offers</span>
     <h1 class="h1-sm">Fair prices, real savings, extras included</h1>
     <p class="lead">All prices are starting prices in rupees. Your vet confirms the final cost before treatment.</p>
-    <div class="row"><a class="btn2" href="#offers">Offers</a><a class="btn2" href="#prices">Price list</a><a class="btn2" href="#reviews">Reviews</a></div>
+    <div class="row"><a class="btn2" href="#offers">Offers</a><a class="btn2" href="#prices">Price list</a><a class="btn2" href="#reviews">Reviews</a><a class="btn2" href="#write-review">Write a review</a></div>
   </div>
   <img class="page-hero-img" src="assets/images/calico-cat-playful.jpg" alt="A playful calico cat lying on its back" width="642" height="350" style="object-position:70% center">
 </div></section>
@@ -82,7 +82,7 @@
   <span class="eyebrow">Customer reviews &amp; ratings</span>
   <h2 class="h2">What pet parents say</h2>
   <div class="split" style="gap:32px;align-items:start;margin-bottom:40px">
-    <div class="card card-cream stack" style="gap:6px;align-items:flex-start"><span class="rating-big" style="font-size:72px">4.8</span><p class="stars" style="font-size:26px" aria-label="4.8 out of 5 stars">★★★★★</p><p>Based on 312 sample reviews</p><div style="margin-top:12px"><a class="btn" href="book.html">Book and share your experience</a></div></div>
+    <div class="card card-cream stack" style="gap:6px;align-items:flex-start"><span class="rating-big" style="font-size:72px">4.8</span><p class="stars" style="font-size:26px" aria-label="4.8 out of 5 stars">★★★★★</p><p>Based on 312 sample reviews</p><div style="margin-top:12px"><a class="btn" href="#write-review">Write a review</a></div></div>
     <div class="stack" style="gap:12px">
       <div class="bar-row"><span>5 stars</span><div class="bar"><i style="width:78%"></i></div><span>78%</span></div>
       <div class="bar-row"><span>4 stars</span><div class="bar"><i style="width:15%"></i></div><span>15%</span></div>
@@ -102,17 +102,61 @@
   <p class="note">Sample reviews and ratings shown for illustration. Real reviews from our pet parents coming soon.</p>
 </div></section>
 
+<section id="write-review" class="sec anchor"><div class="wrap split" style="gap:40px;align-items:start">
+  <div class="stack">
+    <span class="eyebrow">Write a review</span>
+    <h2 class="h2-flush">Tell us about your visit</h2>
+    <p>Your honest feedback helps other pet parents and helps our team improve. It takes less than a minute.</p>
+    <div class="card card-cream stack" style="gap:10px">
+      <p style="font-weight:700">How it works</p>
+      <div class="check"><span class="step-n" style="width:28px;height:28px;font-size:14px">1</span><span>Rate your visit and write a few lines.</span></div>
+      <div class="check"><span class="step-n" style="width:28px;height:28px;font-size:14px">2</span><span>Tap <b>Send review on WhatsApp</b>. Your review is typed out for you, so just press Send.</span></div>
+      <div class="check"><span class="step-n" style="width:28px;height:28px;font-size:14px">3</span><span>With your permission, we add it to this page.</span></div>
+    </div>
+    <img src="assets/images/vet-with-dog.jpg" alt="A PetCure vet with a happy dog" width="678" height="452" style="width:100%;border-radius:20px;aspect-ratio:3/2;object-fit:cover">
+  </div>
+
+  <form class="card stack" id="review-form" novalidate style="gap:20px">
+    <fieldset class="rating-field">
+      <legend>Your rating</legend>
+      <div class="star-input"><input type="radio" name="rating" id="star5" value="5"><label for="star5" title="5 stars"><span class="sr-only">5 stars</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></label><input type="radio" name="rating" id="star4" value="4"><label for="star4" title="4 stars"><span class="sr-only">4 stars</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></label><input type="radio" name="rating" id="star3" value="3"><label for="star3" title="3 stars"><span class="sr-only">3 stars</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></label><input type="radio" name="rating" id="star2" value="2"><label for="star2" title="2 stars"><span class="sr-only">2 stars</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></label><input type="radio" name="rating" id="star1" value="1"><label for="star1" title="1 star"><span class="sr-only">1 star</span><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6L2.5 9.4l6.6-.8z"/></svg></label></div>
+      <p class="rating-label" id="rating-label">Tap a star</p>
+    </fieldset>
+    <div class="field"><span class="label">Which service did you use?</span><div class="pills" id="review-services" role="group" aria-label="Service used"><button type="button" class="pill sm" data-service="Check-up" aria-pressed="false">Check-up</button><button type="button" class="pill sm" data-service="Vaccination" aria-pressed="false">Vaccination</button><button type="button" class="pill sm" data-service="Grooming" aria-pressed="false">Grooming</button><button type="button" class="pill sm" data-service="Surgery" aria-pressed="false">Surgery</button><button type="button" class="pill sm" data-service="Dental" aria-pressed="false">Dental</button><button type="button" class="pill sm" data-service="Diagnostics" aria-pressed="false">Diagnostics</button><button type="button" class="pill sm" data-service="Emergency" aria-pressed="false">Emergency</button><button type="button" class="pill sm" data-service="Boarding" aria-pressed="false">Boarding</button></div></div>
+    <div class="fields">
+      <div class="field"><label for="rv-name">Your name</label><input id="rv-name" autocomplete="given-name" maxlength="40"></div>
+      <div class="field"><label for="rv-pet">Pet's name and type <span style="font-weight:400;color:var(--muted)">(optional)</span></label><input id="rv-pet" maxlength="40" placeholder="e.g. Bruno, dog"></div>
+    </div>
+    <div class="field"><label for="rv-text">Your review</label><textarea id="rv-text" rows="5" maxlength="600" placeholder="What did you like? What could we do better?"></textarea><span class="char-count" id="rv-count">0 / 600</span></div>
+    <label class="checkbox" style="margin-top:0"><input type="checkbox" id="rv-consent" checked><span>PetCure Clinic may show my first name and review on this website.</span></label>
+    <button class="btn btn-wa" type="submit"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.8 14.1c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.2-4.6c-.4-.5-1.3-1.7-1.3-3.3s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.8-.1 1.5z"/></svg>Send review on WhatsApp</button>
+    <p class="error" id="rv-error" role="alert"></p>
+  </form>
+
+  <div class="card done-card" id="review-done" hidden style="text-align:center;align-items:center">
+    <svg width="64" height="64" viewBox="0 0 64 64" aria-hidden="true"><circle cx="32" cy="32" r="32" fill="#14233B"/><path d="M19 33l9 9 17-19" fill="none" stroke="#E3C98B" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <h2 style="font-size:30px">Thank you for your feedback!</h2>
+    <p>WhatsApp should have opened with your review. Tap <b>Send</b> there to share it with our team.</p>
+    <div class="done-actions">
+      <a class="btn btn-wa" id="rv-wa" href="#" target="_blank" rel="noopener"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.8 14.1c-.2.7-1.4 1.3-2 1.4-.5.1-1.2.1-1.9-.1a17 17 0 0 1-1.7-.6 13.4 13.4 0 0 1-5.2-4.6c-.4-.5-1.3-1.7-1.3-3.3s.8-2.3 1.1-2.6c.3-.3.6-.4.8-.4h.6c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .6l-.3.5-.4.5c-.2.2-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.2.5.1.7-.1l.9-1.1c.2-.3.4-.2.7-.1l2 1c.3.1.5.2.6.3.1.2.1.8-.1 1.5z"/></svg>Open WhatsApp again</a>
+      <a class="btn2" id="rv-mail" href="#">Send by email instead</a>
+    </div>
+    <button class="btn2" type="button" id="rv-reset" style="box-shadow:none;text-decoration:underline">Write another review</button>
+  </div>
+</div></section>
+
 {CTA}
 </main>
 <footer class="site-footer">
   <div class="wrap">
     <div><p class="name">PetCure Clinic</p><p style="margin-top:8px;font-size:15px">A-xyz, Bellandur,<br>Bengaluru, Karnataka<br><a href="tel:+910123456789">0123456789</a><br><a href="mailto:petcure@gmail.com">petcure@gmail.com</a><br><a href="https://www.google.com/maps/search/?api=1&amp;query=Bellandur%2C+Bengaluru%2C+Karnataka" target="_blank" rel="noopener">Get directions →</a></p><p style="margin-top:12px;font-size:15px">Open 7 days, 9:00 am – 8:00 pm</p></div>
     <div class="col"><a href="services.html">Services</a><a href="care.html#grooming">Grooming</a><a href="care.html#vaccination">Vaccination</a></div>
-    <div class="col"><a href="book.html">Book appointment</a><a href="pricing.html">Pricing &amp; offers</a><a href="pricing.html#reviews">Reviews</a></div>
+    <div class="col"><a href="book.html">Book appointment</a><a href="pricing.html">Pricing &amp; offers</a><a href="pricing.html#reviews">Reviews</a><a href="pricing.html#write-review">Write a review</a></div>
     <div style="font-size:15px"><p><strong>Emergency?</strong></p><p>Call us first, any time:</p><p style="margin-top:6px"><a href="tel:+919876543210" style="color:#E3C98B;font-weight:700;font-size:20px">98765 43210</a></p><p style="margin-top:6px">24/7 emergency line</p></div>
   </div>
   <p class="copyright">&copy; <span id="year">2026</span> PetCure Clinic. All rights reserved.</p>
 </footer>
 <script src="js/main.js"></script>
+<script src="js/review.js"></script>
 </body>
 </html>

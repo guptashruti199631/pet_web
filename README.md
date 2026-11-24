@@ -27,6 +27,11 @@ No third-party service or setup is needed, and every booking works the same way,
 
 The phone, WhatsApp and email settings live at the top of `js/main.js` (`CLINIC`). The numbers also appear as `tel:` and `wa.me` links in the HTML.
 
+## Customer reviews
+The **Write a review** form is on the Pricing page (`pricing.html#write-review`), linked from the home page and every footer. Customers choose a star rating, the service they used, their name and pet, and write their feedback, then tap **Send review on WhatsApp**. WhatsApp opens with the review typed out, addressed to the clinic (with email as a backup). The message says whether the customer agrees to have it shown on the website.
+
+Reviews don't appear on the site automatically, because GitHub Pages has no database. To publish one, copy the customer's own words into a review card in `pricing.html` (and `index.html` for the home page).
+
 ## Publishing on GitHub Pages
 Repo **Settings → Pages → Build and deployment**: Source "Deploy from a branch", branch `claude/nifty-pascal-1ht4kt`, folder `/ (root)`, then **Save**. The site goes live at `https://guptashruti199631.github.io/pet_web/` within a couple of minutes.
 
